@@ -30,7 +30,7 @@ const RequestPickupComponent = () => {
               </span>
             ))}
           </div>
-          <input onChange={handleImageChange} multiple type="file" />
+          <input name="myImage" onChange={handleImageChange} multiple type="file" />
           <input
             onChange={(e) => setDescription(e.target.value)}
             type="text"

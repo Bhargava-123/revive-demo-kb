@@ -7,7 +7,7 @@ const Requestcontext = createContext({});
 export const RequestPickupContextProvider = ({ children }) =>{
 
     const [selectedDateTime, setSelectedDateTime] = useState(new Date());
-    const [title, setTitle] = useState("");
+    const [title, setTitle] = useState("DUMMY");
     const [image, setImage] = useState([]);
     const [description, setDescription] = useState("");
     const [tags, setTags] = useState([]);
@@ -49,9 +49,9 @@ export const RequestPickupContextProvider = ({ children }) =>{
         setShowSummary(false);
     }
 
-    const handleSubmit = async () => {
+    const handleSubmit = () => {
         console.log("Selected Date and Time:", selectedDateTime);
-        console.log("Image:", image);
+        console.log("Image:", image[0]);
         console.log("Description:", description);
         console.log("Tags:", tags);
         console.log("Quantity:", quantity);
@@ -70,10 +70,22 @@ export const RequestPickupContextProvider = ({ children }) =>{
         const lst = [...data,Data];
         setData(lst);
         setShowSummary(true);
-        await fetch("http://localhost:5000/post-request",{
+        const formData = new FormData();
+        for (var key in Data) {
+            if (key === "img") {
+                console.log("inside img");
+                console.log(Data.img[0]);
+                formData.append(key,Data.img[0],"example.jpg");
+            }
+            else {
+                formData.append(key, Data[key]);
+            }
+            
+        }
+        fetch("http://localhost:5000/post-request", {
             method: "POST",
-            body: Data,
-        }).then(() => console.log(res.json())).catch((e) => console.log(e))
+            body: formData,
+        }).then((res) => res.json()).then((data) => console.log(data)).catch((e) => console.log(e))
     };
 
     

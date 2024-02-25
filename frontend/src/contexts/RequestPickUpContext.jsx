@@ -75,7 +75,7 @@ export const RequestPickupContextProvider = ({ children }) =>{
             if (key === "img") {
                 console.log("inside img");
                 console.log(Data.img[0]);
-                formData.append(key,Data.img[0],"example.jpg");
+                formData.append("myImage",Data.img[0],'');
             }
             else {
                 formData.append(key, Data[key]);
@@ -85,7 +85,11 @@ export const RequestPickupContextProvider = ({ children }) =>{
         fetch("http://localhost:5000/post-request", {
             method: "POST",
             body: formData,
-        }).then((res) => res.json()).then((data) => console.log(data)).catch((e) => console.log(e))
+        }).then((res) => res.json())
+            .then((data) => {
+                console.log(formData);
+            })
+            .catch((e) => console.log(e))
     };
 
     

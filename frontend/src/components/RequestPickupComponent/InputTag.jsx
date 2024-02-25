@@ -13,7 +13,7 @@ const InputTag = () => {
   const [tags, setTags] = useState([]);
 
   useEffect(() => {
-    console.log("Tags:", tags);
+    // console.log("Tags:", tags);
   }, []); 
 
   const handleDelete = (i) => {

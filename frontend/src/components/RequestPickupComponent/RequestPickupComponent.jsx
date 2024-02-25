@@ -16,6 +16,7 @@ const RequestPickupComponent = () => {
     <div className="container">
       {!showSummary ? (
         <>
+          <form className="container" encType = "multipart/form-data" onSubmit={() => navigate("/proceed")}>
           <input type="text" onChange={(e)=>setTitle(e.target.value)} placeholder="Request Title" />
           <div className="image-container">
             {Array.from(image).map((item, index) => (
@@ -66,7 +67,7 @@ const RequestPickupComponent = () => {
               dateFormat="MMMM d, yyyy h:mm aa"
             />
           </div>
-          <form className="container" onSubmit={() => navigate("/proceed")}>
+          
             <button onClick={handleSubmit}>Proceed</button>
           </form>
         </>

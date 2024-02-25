@@ -74,10 +74,12 @@ export const RequestPickupContextProvider = ({ children }) =>{
         for (var key in Data) {
             if (key === "img") {
                 console.log("inside img");
-                console.log(Data.img[0]);
-                formData.append("myImage",Data.img[0],'');
+                for (let i = 0; i < Data.img.length; i++){
+                    formData.append("image[]", Data.img[i], '');
+                    console.log(Data.img[i]);
+                }
             }
-            else {
+            else{
                 formData.append(key, Data[key]);
             }
             

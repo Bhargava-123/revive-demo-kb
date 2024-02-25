@@ -1,5 +1,5 @@
 import React from "react";
-import { createContext,useState } from "react";
+import { createContext,useState,useEffect } from "react";
 
 const Requestcontext = createContext({});
 
@@ -16,6 +16,16 @@ export const RequestPickupContextProvider = ({ children }) =>{
     const [status,setStatus] = useState("Pending");
     const [showSummary, setShowSummary] = useState(false);
     const [data, setData] = useState([]);
+
+    
+    // useEffect(() =>{
+    //     fetch("http://localhost:5000/post-request",{
+    //         method: "POST",
+    //         body: data[(data.length)-1]
+    //     }).then(() => console.log(res.json())).catch((e) => console.log(e))
+    // }
+    // ,[data])
+
 
 
     const handleQuantityChange = (amount) => {
@@ -39,7 +49,7 @@ export const RequestPickupContextProvider = ({ children }) =>{
         setShowSummary(false);
     }
 
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
         console.log("Selected Date and Time:", selectedDateTime);
         console.log("Image:", image);
         console.log("Description:", description);
@@ -47,6 +57,7 @@ export const RequestPickupContextProvider = ({ children }) =>{
         console.log("Quantity:", quantity);
         console.log("Address:", address);
         const Data = {
+            userId: "User123",
             title: title,
             date: selectedDateTime,
             img: image,
@@ -59,6 +70,10 @@ export const RequestPickupContextProvider = ({ children }) =>{
         const lst = [...data,Data];
         setData(lst);
         setShowSummary(true);
+        await fetch("http://localhost:5000/post-request",{
+            method: "POST",
+            body: Data,
+        }).then(() => console.log(res.json())).catch((e) => console.log(e))
     };
 
     

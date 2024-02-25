@@ -6,9 +6,9 @@ const App = () => {
   return (
     <React.Fragment>
 
-      {/* <NavigationBarComponent /> */}
+      <NavigationBarComponent />
 
-      <ScrapDashboard />
+      {/* <ScrapDashboard /> */}
 
     </React.Fragment>
   );

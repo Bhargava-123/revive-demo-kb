@@ -1,7 +1,7 @@
 const express = require("express")
 const app = express();
-import { connectDB } from "./db";
-import router from "./routers/baseRouters";
+const { connectDB } = require("./db");
+const router = require("./routers/baseRouters");
 
 app.use(express.json());
 app.use(router);
